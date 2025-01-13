@@ -17,8 +17,8 @@ const game =() => {
 
    const playMatch =() => {
     const options = document.querySelectorAll(".options button");
-    const playerHand= document.querySelectorAll(".player-hand");
-    const computerHand= document.querySelectorAll(".computer-hand");
+    const playerHand= document.querySelector(".player-hand");
+    const computerHand= document.querySelector(".computer-hand");
     
     const computerOptions = ["rock" , "paper" , "scissor"];
 
