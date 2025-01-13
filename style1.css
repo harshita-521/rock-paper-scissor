@@ -2,9 +2,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Jersey+15&family=Orbitron:wght@400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100&family=Silkscreen:wght@400;700&display=swap');
 /* @import url('https://fonts.googleapis.com/css2?family=Jersey+15&family=Orbitron:wght@400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100&family=Silkscreen:wght@400;700&display=swap'); */
 
+
+@import url('https://fonts.googleapis.com/css2?family=Badeen+Display&family=Jersey+15&family=Montserrat+Underline:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100&family=Silkscreen:wght@400;700&display=swap');
+
+
+
 *{
     margin: 0;
     padding: 0;
+}
+
+.headbar{
+    min-height: 50px;
+    font-size: 20px;
+   font-weight: bold;
+  
+   font-family: "Montserrat Underline", serif;
+   background-color: aliceblue;
+   display: flex;
+   width: 100vw;
+   align-items: center;
 }
 
 section{
@@ -23,6 +40,8 @@ section{
     justify-content: space-around;
     align-items: center;
     min-height: 15vh;
+    /* margin: 10px; */
+    padding: 20px;
 }
 
 .score h2{
@@ -41,6 +60,7 @@ section{
  flex-direction: column;
  justify-content: center;
  align-items: center;
+ transition: opacity 0.5s cubic-bezier(0.72,-0.27, 0.01, 2.73);
 }
 
 .intro h1{
@@ -50,15 +70,91 @@ section{
 
 .intro button{
     background-color: #2980b9; /* Blue color */
-    color: white;
+    color:aliceblue;
  padding: 15px 25px;
  width: 15vw;
  font-weight: bold;
  border: none;
  border-radius: 6px;
  margin: 10px;
-transition: all ;
+
  cursor: pointer;
+ transition: all 1s cubic-bezier(0.72,-0.19, 0, 1.55) 0s;
+ animation: bounce 1s infinite alternate;
+ /* animation: shake 0.5s infinite; */
+}
+
+.intro button:hover{
+    width: 16vw;
+    background-color: aliceblue;
+    color: #2980b9;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-8px); }
+  }
+
+.match{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -95%);
+    transition: opacity 0.5s cubic-bezier(0.72,-0.27, 0.01, 2.73) 0.5s ;
+}
+
+.hands img{
+    height: 150px;
+}
+
+ /* winner */
+.starting{ 
+font-size: 25px;
+/* justify-content: center; */
+text-align: center;
+color: rgb(232, 224, 84);
+/* position: relative; */
+/* top: -100px; */
 }
 
 
+.hands , .options{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.options button{
+background-color: #055388; /* Blue color */
+ color:aliceblue;
+ padding: 15px 25px;
+ width: 15vw;
+ font-weight: bold;
+ border: none;
+ border-radius: 30px;
+ margin: 10px;
+
+ cursor: pointer;
+ /* display: flex;
+    justify-content: space-around; */
+
+}
+
+.hands .computer-hand{
+    transform: rotateY(180deg);
+    /* position: relative;
+    top: -20px;
+    left: 205px; */
+}
+
+
+
+div.fadeOut{
+    opacity: 0;
+    pointer-events: none;
+}
+
+div.fadeIn{
+    opacity: 1;
+    pointer-events: all;
+}
