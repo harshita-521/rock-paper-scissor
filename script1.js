@@ -7,12 +7,22 @@ const game =() => {
    const startGame =() => {
     const playBtn = document.querySelector(".intro button");
     const introScreen = document.querySelector(".intro");
+    const entryScreen = document.querySelector(".entry");
     const matchScreen = document.querySelector(".match");
+    const startBtn = document.querySelector(".entry button");
 
     playBtn.addEventListener("click" , ()=>{
         introScreen.classList.add("fadeOut");
-        matchScreen.classList.add("fadeIn");
+        entryScreen.classList.add("fadeIn");
     });
+
+    startBtn.addEventListener("click",()=>{
+        entryScreen.classList.remove("fadeIn");
+        entryScreen.classList.add("fadeOut");
+        matchScreen.classList.add("fadeIn");
+    })
+
+   
    };
 
    const playMatch =() => {
