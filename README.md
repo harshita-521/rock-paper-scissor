@@ -40,6 +40,6 @@ Through this project, I learned:
 🚀 Future Enhancements: 
 
 1. Include sound effects for player interactions.
-2.Make the design more responsive for mobile devices.
+2. Make the design more responsive for mobile devices.
 3. Add animations for a more engaging user experience.
 
