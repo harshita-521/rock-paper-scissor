@@ -1,122 +1,156 @@
 console.log("Lets Go!");
 
-const game =() => {
-   let pScore=0;
-   let cScore=0;
-   
-   const startGame =() => {
-    const playBtn = document.querySelector(".intro button");
-    const introScreen = document.querySelector(".intro");
-    const entryScreen = document.querySelector(".entry");
-    const matchScreen = document.querySelector(".match");
-    const startBtn = document.querySelector(".entry button");
+const game = () => {
+    let pScore = 0;
+    let cScore = 0;
+    let rounds = 0;
+    let maxRounds = 5;
 
-    playBtn.addEventListener("click" , ()=>{
-        introScreen.classList.add("fadeOut");
-        entryScreen.classList.add("fadeIn");
-    });
 
-    startBtn.addEventListener("click",()=>{
-        entryScreen.classList.remove("fadeIn");
-        entryScreen.classList.add("fadeOut");
-        matchScreen.classList.add("fadeIn");
-    })
+    const startGame = () => {
+        const playBtn = document.querySelector(".intro button");
+        const introScreen = document.querySelector(".intro");
+        const entryScreen = document.querySelector(".entry");
+        const matchScreen = document.querySelector(".match");
+        const startBtn = document.querySelector(".entry button");
 
-   
-   };
+        playBtn.addEventListener("click", () => {
+            introScreen.classList.add("fadeOut");
+            entryScreen.classList.add("fadeIn");
+        });
 
-   const playMatch =() => {
-    const options = document.querySelectorAll(".options button");
-    const playerHand= document.querySelector(".player-hand");
-    const computerHand= document.querySelector(".computer-hand");
-    
-    const computerOptions = ["rock" , "paper" , "scissor"];
+        startBtn.addEventListener("click", () => {
+            entryScreen.classList.remove("fadeIn");
+            entryScreen.classList.add("fadeOut");
+            matchScreen.classList.add("fadeIn");
+        })
 
-    options.forEach( option => {
-        option.addEventListener("click" , function() {
-            
-            // const playerChoice=event.target.textContent.trim();
-            const computerNumber = Math.floor(Math.random()*3);
-            const computerChoice = computerOptions[computerNumber];
-            // here we call compare hands function
 
-            compareHand(this.textContent, computerChoice);
+    };
 
-            //Update images
-            playerHand.src =`assets/${this.textContent}.svg` ;
-            computerHand.src = `assets/${computerChoice}.svg` ;  
-            
-            console.log(playerHand);
-          });
-    });
-   };
+    const playMatch = () => {
+        const options = document.querySelectorAll(".options button");
+        const playerHand = document.querySelector(".player-hand");
+        const computerHand = document.querySelector(".computer-hand");
 
-   const updateScore = () => {
-    const playerScore = document.querySelector(".player-score p");
-    const computerScore = document.querySelector(".computer-score p");
-    playerScore.textContent= pScore;
-    computerScore.textContent= cScore;
-   }
+        const computerOptions = ["ROCK", "PAPER", "SCISSOR"];
 
-   const compareHand = (playerChoice , computerChoice) =>{
-    const winner= document.querySelector(".starting");
+        options.forEach(option => {
+            option.addEventListener("click", function () {
 
-    if(playerChoice === computerChoice){
-        winner.textContent = "TIE" ;
-        return;
+
+                if (rounds >= maxRounds) {
+                    alert("Game Over! ");
+                    return;
+                }
+                // const playerChoice=event.target.textContent.trim();
+                const computerNumber = Math.floor(Math.random() * 3);
+                const computerChoice = computerOptions[computerNumber];
+                // here we call compare hands function
+
+                compareHand(this.textContent, computerChoice);
+
+                //Update images
+                playerHand.src = `assets/${this.textContent}.png`;
+                computerHand.src = `assets/${computerChoice}.png`;
+
+                console.log(playerHand);
+                rounds++;
+
+                if (rounds === maxRounds) {
+                    setTimeout(declareWinner, 500);
+                }
+
+            });
+        });
+    };
+
+    const updateScore = () => {
+        const playerScore = document.querySelector(".player-score p");
+        const computerScore = document.querySelector(".computer-score p");
+        playerScore.textContent = pScore;
+        computerScore.textContent = cScore;
     }
 
-    if(playerChoice === "rock"){
-        if(computerChoice === "scissor"){
-            winner.textContent = "Player Wins !"
-            pScore++;
-            updateScore();
+    const compareHand = (playerChoice, computerChoice) => {
+        const winner = document.querySelector(".starting");
+
+        if (playerChoice === computerChoice) {
+            winner.textContent = "TIE";
             return;
         }
-        else{
-            winner.textContent = "Computer Wins !"
-            cScore++;
-            updateScore();
-            return;
+
+        if (playerChoice === "ROCK") {
+            if (computerChoice === "SCISSOR") {
+                winner.textContent = "Player Wins !"
+                pScore++;
+                updateScore();
+                return;
+            }
+            else {
+                winner.textContent = "Computer Wins !"
+                cScore++;
+                updateScore();
+                return;
+            }
+
         }
-       
+
+        if (playerChoice === "PAPER") {
+            if (computerChoice === "SCISSOR") {
+                winner.textContent = "Computer Wins !"
+                cScore++;
+                updateScore();
+                return;
+            }
+            else {
+                winner.textContent = "Player Wins !"
+                pScore++;
+                updateScore();
+                return;
+            }
+
+        }
+
+        if (playerChoice === "SCISSOR") {
+            if (computerChoice === "PAPER") {
+                winner.textContent = "Player Wins !"
+                pScore++;
+                updateScore();
+                return;
+            }
+            else {
+                winner.textContent = "Computer Wins !"
+                cScore++;
+                updateScore();
+                return;
+            }
+
+        }
     }
 
-    if(playerChoice === "paper"){
-        if(computerChoice === "scissor"){
-            winner.textContent = "Computer Wins !"
-            cScore++;
-            updateScore();
-            return;
-        }
-        else{
-            winner.textContent = "Player Wins !"
-            pScore++;
-            updateScore();
-            return;
-        }
-      
-    }
+    const declareWinner = () => {
+        const winner = document.querySelector(".starting");
 
-    if(playerChoice === "scissor"){
-        if(computerChoice === "paper"){
-            winner.textContent = "Player Wins !"
-            pScore++;
-            updateScore();
-            return;
+        if (pScore > cScore) {
+            winner.textContent = `🎉 You Win! Score: ${pScore} - ${cScore}`;
+        } else if (pScore < cScore) {
+            winner.textContent = `💀 You Lose! Score: ${pScore} - ${cScore}`;
+        } else {
+            winner.textContent = `🤝 It's a Tie! Score: ${pScore} - ${cScore}`;
         }
-        else{
-            winner.textContent = "Computer Wins !"
-            cScore++;
-            updateScore();
-            return;
-        }
-       
-    }
-   }
+    };
 
-   startGame();
-   playMatch();
+    // const resetGame = () => {
+    //     pScore = 0;
+    //     cScore = 0;
+    //     rounds = 0;
+    //     updateScore();
+    //     document.querySelector(".starting").textContent = "Let's Play!";
+    // };
+
+    startGame();
+    playMatch();
 }
 
 game();
