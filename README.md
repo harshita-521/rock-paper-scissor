@@ -37,9 +37,5 @@ Through this project, I learned:
 3. Adding dynamic behavior with JavaScript.
 
 
-🚀 Future Enhancements: 
 
-- Include sound effects for player interactions.
-- Make the design more responsive for mobile devices.
-- Add animations for a more engaging user experience.
 
